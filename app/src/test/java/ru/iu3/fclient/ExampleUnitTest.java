@@ -1,4 +1,4 @@
-package com.example.rpo_1;
+package ru.iu3.fclient;
 
 import org.junit.Test;
 

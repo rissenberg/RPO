@@ -1,4 +1,4 @@
-package com.example.rpo_1;
+package ru.iu3.fclient;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.rpo_1", appContext.getPackageName());
+        assertEquals("ru.iu3.fclient", appContext.getPackageName());
     }
 }
