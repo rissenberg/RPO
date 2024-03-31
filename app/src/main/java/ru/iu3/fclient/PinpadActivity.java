@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
+import ru.iu3.fclient.R;
+
 public class PinpadActivity extends AppCompatActivity {
 
     TextView tvPin;
@@ -17,22 +21,38 @@ public class PinpadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_pinpad);
-
         tvPin = findViewById(R.id.txtPin);
-
         ShuffleKeys();
-
         findViewById(R.id.btnOK).setOnClickListener((View) -> {
+            Intent it = new Intent();
+            it.putExtra("pin", pin);
+            setResult(RESULT_OK, it);
             finish();
         });
-
         findViewById(R.id.btnReset).setOnClickListener((View) -> {
             pin = "";
             tvPin.setText("");
         });
+        /*В метод onCreate следует добавить обработку этих параметров, полученных из функции enterPin.*/
+        TextView ta = findViewById(R.id.txtAmount);
+        String amt = String.valueOf(getIntent().getStringExtra("amount"));
+        Long f = Long.valueOf(amt);
+
+        DecimalFormat df = new DecimalFormat("#,###,###,##0.00");
+        String s = df.format(f);
+        ta.setText("Сумма: " + s);
+        TextView tp = findViewById(R.id.txtPtc);
+        int pts = getIntent().getIntExtra("ptc", 0);
+        if (pts == 2)
+            tp.setText("Осталось две попытки");
+        else if (pts == 1)
+            tp.setText("Осталась одна попытка");
     }
 
+    //Обработчики кнопок ввода цифр
     public void keyClick(View v)
     {
         String key = ((TextView)v).getText().toString();
@@ -42,14 +62,7 @@ public class PinpadActivity extends AppCompatActivity {
             pin += key;
             tvPin.setText("****".substring(3 - sz));
         }
-        findViewById(R.id.btnOK).setOnClickListener((View) -> {
-            Intent it = new Intent();
-            it.putExtra("pin", pin);
-            setResult(RESULT_OK, it);
-            finish();
-        });
     }
-
     protected void ShuffleKeys()
     {
         Button keys[] = new Button[] {
@@ -64,8 +77,7 @@ public class PinpadActivity extends AppCompatActivity {
                 findViewById(R.id.btnKey8),
                 findViewById(R.id.btnKey9),
         };
-
-        byte[] rnd = MainActivity.randomBytes(MAX_KEYS);
+        byte[] rnd = ru.iu3.fclient.MainActivity.randomBytes(MAX_KEYS);
         for(int i = 0; i < MAX_KEYS; i++)
         {
             int idx = (rnd[i] & 0xFF) % 10;
@@ -74,6 +86,4 @@ public class PinpadActivity extends AppCompatActivity {
             keys[i].setText(txt);
         }
     }
-
-
 }
