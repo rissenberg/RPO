@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `paintings`
     `artistid` INT,
     `museumid` INT,
     `year` INT,
-    FOREIGN KEY (`artistid`)  REFERENCES `artists`(`id`),
+    FOREIGN KEY (`artistid`)  REFERENCES `artists`(`id`) ,
     FOREIGN KEY (`museumid`)  REFERENCES `museums`(`id`),
     PRIMARY KEY (`id`)
     );
