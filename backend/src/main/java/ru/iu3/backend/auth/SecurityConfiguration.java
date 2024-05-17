@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(final WebSecurity webSecurity) {
-        webSecurity.ignoring().antMatchers("/auth/login");
+        webSecurity.ignoring().antMatchers("/auth/**");
     }
 
     @Override
@@ -67,12 +67,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     AuthenticationFilter authenticationFilter() throws Exception {
         final AuthenticationFilter filter = new AuthenticationFilter(PROTECTED_URLS);
         filter.setAuthenticationManager(authenticationManager());
-        //filter.setAuthenticationSuccessHandler(successHandler());
         return filter;
     }
 
     @Bean
-    AuthenticationEntryPoint forbiddenEntryPoint() {
-        return new HttpStatusEntryPoint(HttpStatus.FORBIDDEN);
-    }
+    AuthenticationEntryPoint forbiddenEntryPoint() { return new HttpStatusEntryPoint(HttpStatus.FORBIDDEN); }
 }

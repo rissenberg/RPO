@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `usermuseums`
+CREATE TABLE IF NOT EXISTS `usersmuseums`
 (
     `userid` INT NOT NULL ,
     `museumid` INT NOT NULL,
