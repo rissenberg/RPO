@@ -25,8 +25,8 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest,
-                                                HttpServletResponse httpServletResponse)
-        throws AuthenticationException, IOException, ServletException {
+            HttpServletResponse httpServletResponse)
+            throws AuthenticationException, IOException, ServletException {
 
         Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
         String token = httpServletRequest.getHeader(AUTHORIZATION);
@@ -34,15 +34,15 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
             token = StringUtils.removeStart(token, "Bearer").trim();
         }
         Authentication requestAuthentication = new UsernamePasswordAuthenticationToken(token,
-            token);
+                token);
         return getAuthenticationManager().authenticate(requestAuthentication);
     }
 
     @Override
     protected void successfulAuthentication(final HttpServletRequest request,
-                                            final HttpServletResponse response,
-                                            final FilterChain chain, final Authentication authResult)
-        throws IOException, ServletException {
+            final HttpServletResponse response,
+            final FilterChain chain, final Authentication authResult)
+            throws IOException, ServletException {
         SecurityContextHolder.getContext().setAuthentication(authResult);
         chain.doFilter(request, response);
     }

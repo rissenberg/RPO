@@ -27,15 +27,15 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
-                                                  UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
 
     }
 
 
     @Override
     protected UserDetails retrieveUser(String userName,
-                                       UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken)
-        throws AuthenticationException {
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken)
+            throws AuthenticationException {
 
         Object token = usernamePasswordAuthenticationToken.getCredentials();
         Optional<ru.iu3.backend.models.User> uu = userRepository.findByToken(String.valueOf(token));
@@ -62,11 +62,11 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
         }
 
         UserDetails user = new User(u.login, u.password,
-            true,
-            true,
-            true,
-            true,
-            AuthorityUtils.createAuthorityList("USER"));
+                true,
+                true,
+                true,
+                true,
+                AuthorityUtils.createAuthorityList("USER"));
         return user;
     }
 }
