@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `museums`
+(
+`id` INT NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(128) NOT NULL,
+`location` VARCHAR(128),
+    PRIMARY KEY (`id`)
+);
