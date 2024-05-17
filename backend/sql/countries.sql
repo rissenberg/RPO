@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS `countries`
-(
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(64) UNIQUE NOT NULL,
-    PRIMARY KEY (`id`)
-    );
